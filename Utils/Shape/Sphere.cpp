@@ -21,5 +21,22 @@ bool Sphere::Hit(Ray ray, double tMin, double tMax, HitResult& result)
         return false;
     }
 
-    auto root = (-b - std::sqrt(delta)) / 2 * a;
+    auto sqrtDelta = std::sqrt(delta);
+    auto root = (-b - sqrtDelta) / 2 * a;
+    if (root < tMin || root > tMax)
+    {
+        root = (-b + sqrtDelta) / 2 * a;
+        if (root < tMin || root > tMax)
+        {
+            return false;
+        }
+    }
+
+    result.Value = root;
+    result.Point = ray.At(root);
+
+    auto outNormal = Normalize(result.Point - position);
+    result.SetSideNormal(ray.GetDirection(), outNormal);
+
+    return true;
 }

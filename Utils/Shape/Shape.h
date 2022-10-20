@@ -7,6 +7,13 @@ struct HitResult
     double Value;
     Point3 Point;
     Vector3 Normal;
+    bool OutSide;
+
+    inline void SetSideNormal(Vector3 dir, Vector3 outNormal)
+    {
+        OutSide = Dot(dir, outNormal) < 0;
+        Normal = OutSide ? outNormal : -outNormal;
+    }
 };
 
 class Shape
