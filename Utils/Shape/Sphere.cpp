@@ -35,8 +35,16 @@ bool Sphere::Hit(Ray ray, double tMin, double tMax, HitResult& result)
     result.Value = root;
     result.Point = ray.At(root);
 
+    // set hit color
+    result.Color = color;
+
     auto outNormal = Normalize(result.Point - position);
     result.SetSideNormal(ray.GetDirection(), outNormal);
 
     return true;
+}
+
+void Sphere::SetColor(Color color)
+{
+    this->color = color;
 }

@@ -6,6 +6,7 @@ struct HitResult
 {
     double Value;
     Point3 Point;
+    Color Color;
     Vector3 Normal;
     bool OutSide;
 

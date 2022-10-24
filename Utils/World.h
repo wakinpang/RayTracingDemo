@@ -1,16 +1,23 @@
 #pragma once
 
 #include "Shape/Shape.h"
+#include "Camera.h"
 #include <vector>
+#include <memory>
 
 class World
 {
 public:
-    World();
+    World(Camera cam);
 
-    void AddShap(Shape& obj);
-    void Render();
+    void AddShape(std::shared_ptr<Shape> obj);
+    void Render(int width, int height);
 
 private:
-    std::vector<Shape> shapes;
+    std::vector<std::shared_ptr<Shape>> shapes;
+    int sampleCount = 128;
+    Camera cam;
+
+    Color rayColor(Ray ray);
+    void writeColor(Color& color);
 };

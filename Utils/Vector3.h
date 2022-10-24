@@ -140,6 +140,11 @@ inline Vector3 Normalize(const Vector3& v)
     return v / v.Length();
 }
 
+inline std::ostream& operator<<(std::ostream& out, const Vector3& v)
+{
+    return out << v.GetX() << ' ' << v.GetY() << ' ' << v.GetZ();
+}
+
 // Name reference
 using Color = Vector3;
 using Point3 = Vector3;

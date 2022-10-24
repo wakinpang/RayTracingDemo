@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "d:/Workspace/RayTracing",
-      "program": "d:/Workspace/RayTracing/build/Debug/outDebug",
+      "cwd": "d:/Workspace/RayTracingDemo",
+      "program": "d:/Workspace/RayTracingDemo/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [

@@ -1,0 +1,27 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "cppbuild",
+			"label": "C++",
+			"command": "C:\\MinGW\\bin\\g++.exe",
+			"args": [
+				"-fdiagnostics-color=always",
+				"-g",
+				"${workspaceFolder}\\*.cpp",
+				"${workspaceFolder}\\Utils\\*.cpp",
+				"${workspaceFolder}\\Utils\\Shape\\*.cpp",
+				"-o",
+				"${fileDirname}\\${fileBasenameNoExtension}.exe"
+			],
+			"options": {
+				"cwd": "${fileDirname}"
+			},
+			"problemMatcher": [
+				"$gcc"
+			],
+			"group": "build",
+			"detail": "编译器: C:\\MinGW\\bin\\g++.exe"
+		},
+	]
+}
