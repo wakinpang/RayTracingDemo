@@ -16,6 +16,11 @@ bool Sphere::Hit(Ray ray, double tMin, double tMax, HitResult& result)
 
     auto delta = b * b - 4 * a * c;
 
+    // if (dir.GetY() < 0.3 && dir.GetX() > -0.3 && dir.GetX() < 0.3 && dir.GetY() > -0.3) {
+    //     std::cerr << "Origin: " << ray.GetOrigin() << " Direction: " << dir << " Delta: " << delta << std::endl;
+    //     std::cerr << a << " " << b << " " << c << std::endl;
+    // }
+
     if (delta < 0)
     {
         return false;

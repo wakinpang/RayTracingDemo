@@ -5,7 +5,7 @@
 
 int main()
 {
-    auto camera = Camera(Point3(0, 0, 0), 1.6, 0.9, 1);
+    auto camera = Camera(Point3(0, 0, 0), 2, 2 * 9 / 16.0, 0.8);
     auto world = World(camera);
 
     auto blueSphere = std::make_shared<Sphere>(Point3(0, 0, -1), 0.5);

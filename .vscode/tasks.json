@@ -4,7 +4,7 @@
 		{
 			"type": "cppbuild",
 			"label": "C++",
-			"command": "C:\\MinGW\\bin\\g++.exe",
+			"command": "g++.exe",
 			"args": [
 				"-fdiagnostics-color=always",
 				"-g",
@@ -21,7 +21,7 @@
 				"$gcc"
 			],
 			"group": "build",
-			"detail": "编译器: C:\\MinGW\\bin\\g++.exe"
+			"detail": "g++ compile"
 		},
 	]
 }

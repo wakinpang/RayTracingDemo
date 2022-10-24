@@ -125,7 +125,7 @@ inline Vector3 operator*(double v, const Vector3& t) // reverse condition in ope
 
 inline double Dot(const Vector3& u, const Vector3& v)
 {
-    return u.GetX() * v.GetX() + u.GetY() * v.GetY() + u.GetZ() + v.GetZ();
+    return u.GetX() * v.GetX() + u.GetY() * v.GetY() + u.GetZ() * v.GetZ();
 }
 
 inline Vector3 Cross(const Vector3& u, const Vector3& v)

@@ -29,6 +29,7 @@ void World::Render(int width, int height)
                 double v = (i + GetRandomDouble()) / (height - 1);
 
                 Ray r = cam.GetRay(u, v);
+                //std::cerr << "Origin:" << r.GetOrigin() << "Direction:" << r.GetDirection() << std::endl; 
 
                 pixelColor += rayColor(r);
             }
@@ -42,13 +43,24 @@ void World::Render(int width, int height)
 Color World::rayColor(Ray ray)
 {
     auto count = shapes.size();
+    bool hit = false;
+    double farthest = Constants::infinity;
+    HitResult finalRes;
+
     for (int i = 0; i < count; i++)
     {
         HitResult result;
-        if (shapes[i]->Hit(ray, 0, Constants::infinity, result))
+        if (shapes[i]->Hit(ray, 0, farthest, result))
         {
-            return result.Color;
+            hit = true;
+            farthest = result.Value;
+            finalRes = result;
         }
+    }
+
+    if (hit)
+    {
+        return finalRes.Color;
     }
 
     // no hit, return background color
