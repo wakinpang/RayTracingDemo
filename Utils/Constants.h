@@ -9,6 +9,7 @@ class Constants
 public:
     static constexpr double pi = 3.1415926535897932385;
     static constexpr double infinity = std::numeric_limits<double>::infinity();
+    static constexpr int maxDepth = 50;
 };
 
 inline double GetRandomDouble()

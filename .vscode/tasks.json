@@ -11,6 +11,7 @@
 				"${workspaceFolder}\\*.cpp",
 				"${workspaceFolder}\\Utils\\*.cpp",
 				"${workspaceFolder}\\Utils\\Shape\\*.cpp",
+				"${workspaceFolder}\\Utils\\Material\\*.cpp",
 				"-o",
 				"${fileDirname}\\${fileBasenameNoExtension}.exe"
 			],

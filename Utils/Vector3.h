@@ -2,6 +2,7 @@
 
 #include <cmath>
 #include <iostream>
+#include "Constants.h"
 
 class Vector3
 {
@@ -17,6 +18,17 @@ public:
         e[0] = x;
         e[1] = y;
         e[2] = z;
+    }
+
+    // static method
+    inline static Vector3 Random()
+    {
+        return Vector3(GetRandomDouble(), GetRandomDouble(), GetRandomDouble());
+    }
+
+    inline static Vector3 Random(double min, double max)
+    {
+        return Vector3(GetRandomDouble(min, max), GetRandomDouble(min, max), GetRandomDouble(min, max));
     }
 
     // base property
@@ -121,6 +133,11 @@ private:
 inline Vector3 operator*(double v, const Vector3& t) // reverse condition in operator *
 {
     return t * v;
+}
+
+inline Vector3 operator*(const Vector3& u, const Vector3& v)
+{
+    return Vector3(u.GetX() * v.GetX(), u.GetY() * v.GetY(), u.GetZ() * v.GetZ());
 }
 
 inline double Dot(const Vector3& u, const Vector3& v)

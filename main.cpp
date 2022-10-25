@@ -2,16 +2,18 @@
 #include "Utils/Camera.h"
 #include "Utils/Shape/Sphere.h"
 #include "Utils/World.h"
+#include "Utils/Material/Lambertian.h"
 
 int main()
 {
-    auto camera = Camera(Point3(0, 0, 0), 2, 2 * 9 / 16.0, 0.8);
+    auto camera = Camera(Point3(0, 0, 0), 2 * 16 / 9.0, 2, 1);
     auto world = World(camera);
 
-    auto blueSphere = std::make_shared<Sphere>(Point3(0, 0, -1), 0.5);
-    blueSphere->SetColor(Color(0, 0, 128));
-    auto greenSphere = std::make_shared<Sphere>(Point3(0, -100.5, -1), 100);
-    greenSphere->SetColor(Color(0, 128, 0));
+    auto lambertianBlue = std::make_shared<Lambertian>(Color(0.4, 0.4, 1));
+    auto lambertianGreen = std::make_shared<Lambertian>(Color(0.4, 1, 0.4));
+
+    auto blueSphere = std::make_shared<Sphere>(Point3(0, 0, -1), 0.5, lambertianBlue);
+    auto greenSphere = std::make_shared<Sphere>(Point3(0, -100.5, -1), 100, lambertianGreen);
 
     world.AddShape(blueSphere);
     world.AddShape(greenSphere);

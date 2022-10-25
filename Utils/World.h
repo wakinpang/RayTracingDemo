@@ -18,6 +18,6 @@ private:
     int sampleCount = 128;
     Camera cam;
 
-    Color rayColor(Ray ray);
+    Color rayColor(Ray ray, int depth);
     void writeColor(Color& color);
 };

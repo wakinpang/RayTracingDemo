@@ -1,4 +1,5 @@
 #include "World.h"
+#include "Material/Material.h"
 #include "Constants.h"
 
 World::World(Camera cam) : cam(cam)
@@ -31,7 +32,7 @@ void World::Render(int width, int height)
                 Ray r = cam.GetRay(u, v);
                 //std::cerr << "Origin:" << r.GetOrigin() << "Direction:" << r.GetDirection() << std::endl; 
 
-                pixelColor += rayColor(r);
+                pixelColor += rayColor(r, Constants::maxDepth);
             }
 
             pixelColor /= sampleCount;
@@ -40,8 +41,14 @@ void World::Render(int width, int height)
     }
 }
 
-Color World::rayColor(Ray ray)
+Color World::rayColor(Ray ray, int depth)
 {
+    // if this ray has scattered for enough times, treat it as did not hit anything
+    if (depth == 0)
+    {
+        return Color(0, 0, 0);
+    } 
+
     auto count = shapes.size();
     bool hit = false;
     double farthest = Constants::infinity;
@@ -50,7 +57,7 @@ Color World::rayColor(Ray ray)
     for (int i = 0; i < count; i++)
     {
         HitResult result;
-        if (shapes[i]->Hit(ray, 0, farthest, result))
+        if (shapes[i]->Hit(ray, 0.001, farthest, result)) // tMin 0.001, to ignore the ray that is really short
         {
             hit = true;
             farthest = result.Value;
@@ -60,7 +67,18 @@ Color World::rayColor(Ray ray)
 
     if (hit)
     {
-        return finalRes.Color;
+        Color attenuation;
+        Ray scatteredRay;
+        bool scattered = finalRes.Material->Scatter(ray, finalRes, attenuation, scatteredRay);
+        if (scattered)
+        {
+            return attenuation * rayColor(scatteredRay, depth - 1);
+        }
+        else
+        {
+            // if not scattered, absorb all rays
+            return Color(0, 0, 0);
+        }
     }
 
     // no hit, return background color
@@ -72,9 +90,10 @@ Color World::rayColor(Ray ray)
 
 void World::writeColor(Color& color)
 {
-    double r = color.GetX();
-    double g = color.GetY();
-    double b = color.GetZ();
+    // gamma-correct, which gamma = 2
+    double r = std::sqrt(color.GetX());
+    double g = std::sqrt(color.GetY());
+    double b = std::sqrt(color.GetZ());
 
     std::cout << (int)(256 * Clamp(r, 0, 0.999)) << ' '
               << (int)(256 * Clamp(g, 0, 0.999)) << ' '

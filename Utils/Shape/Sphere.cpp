@@ -1,8 +1,10 @@
 #include "Sphere.h"
+#include "..\Material\Material.h"
 
-Sphere::Sphere(Vector3 pos, double radius) : Shape(pos)
+Sphere::Sphere(Vector3 pos, double radius, std::shared_ptr<Material> material) : Shape(pos)
 {
     this->radius = radius;
+    this->mat = material;
 }
 
 bool Sphere::Hit(Ray ray, double tMin, double tMax, HitResult& result)
@@ -41,15 +43,10 @@ bool Sphere::Hit(Ray ray, double tMin, double tMax, HitResult& result)
     result.Point = ray.At(root);
 
     // set hit color
-    result.Color = color;
+    result.Material = mat;
 
     auto outNormal = Normalize(result.Point - position);
     result.SetSideNormal(ray.GetDirection(), outNormal);
 
     return true;
-}
-
-void Sphere::SetColor(Color color)
-{
-    this->color = color;
 }

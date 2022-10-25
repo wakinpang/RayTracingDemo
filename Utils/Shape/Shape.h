@@ -1,14 +1,17 @@
 #pragma once
 
 #include "../Ray.h"
+#include <memory>
+
+class Material;
 
 struct HitResult
 {
     double Value;
     Point3 Point;
-    Color Color;
     Vector3 Normal;
     bool OutSide;
+    std::shared_ptr<Material> Material;
 
     inline void SetSideNormal(Vector3 dir, Vector3 outNormal)
     {
