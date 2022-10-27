@@ -15,7 +15,6 @@ public:
 
 private:
     std::vector<std::shared_ptr<Shape>> shapes;
-    int sampleCount = 128;
     Camera cam;
 
     Color rayColor(Ray ray, int depth);

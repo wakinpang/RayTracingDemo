@@ -30,6 +30,20 @@ public:
     {
         return Vector3(GetRandomDouble(min, max), GetRandomDouble(min, max), GetRandomDouble(min, max));
     }
+    
+    inline static Vector3 GetRandomPointInUnitSphere()
+    {
+        while (true)
+        {
+            Vector3 p = Vector3::Random(-1, 1);
+            if (p.LengthSquare() >= 1)
+            {
+                continue;
+            }
+
+            return p;
+        }
+    }
 
     // base property
     inline double GetX() const

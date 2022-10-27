@@ -24,7 +24,7 @@ void World::Render(int width, int height)
         {
             Color pixelColor(0, 0, 0);
 
-            for (int c = 0; c < sampleCount; c++) 
+            for (int c = 0; c < Constants::sampleCount; c++) 
             {
                 double u = (j + GetRandomDouble()) / (width - 1);
                 double v = (i + GetRandomDouble()) / (height - 1);
@@ -35,7 +35,7 @@ void World::Render(int width, int height)
                 pixelColor += rayColor(r, Constants::maxDepth);
             }
 
-            pixelColor /= sampleCount;
+            pixelColor /= Constants::sampleCount;
             writeColor(pixelColor);
         }
     }
@@ -77,15 +77,12 @@ Color World::rayColor(Ray ray, int depth)
         else
         {
             // if not scattered, absorb all rays
-            return Color(0, 0, 0);
+            return attenuation;
         }
     }
 
-    // no hit, return background color
-    Vector3 normalizedDir = Normalize(ray.GetDirection());
-    double t = 0.5 * (normalizedDir.GetY() + 1.0);
-
-    return (1 - t) * Color(1, 1, 1) + t * Color(0.5, 0.7, 1);
+    // no hit, ambient light
+    return Color(0.1, 0.1, 0.1);
 }
 
 void World::writeColor(Color& color)

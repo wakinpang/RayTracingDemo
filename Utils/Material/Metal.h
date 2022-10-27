@@ -1,15 +1,15 @@
 #pragma once
 
 #include "Material.h"
-#include "..\Vector3.h"
 
-class Lambertian : public Material
+class Metal : public Material
 {
 public:
-    Lambertian(const Color& att);
+    Metal(const Color& att, double f);
     bool Scatter(const Ray& rayIn, const HitResult& result, Color& attenuation, Ray& scattered) const override;
-
 private:
+    double fuzz;
     Color attenuation;
-    double reflectRate;
+
+    Vector3 reflect(const Vector3& v, const Vector3& n) const;
 };
