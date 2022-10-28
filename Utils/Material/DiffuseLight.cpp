@@ -8,8 +8,7 @@ DiffuseLight::DiffuseLight(const Color& att, double d) : attenuation(att), diffu
 
 bool DiffuseLight::Scatter(const Ray& rayIn, const HitResult& result, Color& attenuation, Ray& scattered) const
 {
-    auto inverseDir = -rayIn.GetDirection();
-    attenuation = Dot(inverseDir, result.Normal) > diffuse ? this->attenuation : Color(0, 0, 0);
+    attenuation = this->attenuation;
 
     return false;
 }

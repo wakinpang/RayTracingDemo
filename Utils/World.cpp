@@ -82,7 +82,7 @@ Color World::rayColor(Ray ray, int depth)
     }
 
     // no hit, ambient light
-    return Color(0.1, 0.1, 0.1);
+    return Color(0.2, 0.2, 0.2);
 }
 
 void World::writeColor(Color& color)

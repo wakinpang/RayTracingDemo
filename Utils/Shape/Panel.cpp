@@ -14,5 +14,30 @@ bool Panel::Hit(Ray ray, double tMin, double tMax, HitResult& result)
         return false;
     }
 
-    auto t = Dot(normal, (ray.GetOrigin() - position)) / Dot(normal, ray.GetDirection());
+    auto t = Dot(normal, (ray.GetOrigin() - position)) / Dot(normal, -ray.GetDirection());
+
+    if (t < tMin || t > tMax) 
+    {
+        return false;
+    }
+
+    auto p = ray.At(t);
+    auto panelVector = p - position;
+
+    auto horizonLengthSquare = horizontal.LengthSquare();
+    auto verticalLengthSquare = vertical.LengthSquare();
+
+    auto m = Dot(panelVector, horizontal) / horizonLengthSquare;
+    auto n = Dot(panelVector, vertical) / verticalLengthSquare;
+    if (m < 0 || m > 1 || n < 0 || n > 1) // although intersecting with this panel, but not in the range
+    {
+        return false;
+    }
+
+    result.SetSideNormal(ray.GetDirection(), normal);
+    result.Material = material;
+    result.Point = p;
+    result.Value = t;
+
+    return true;
 } 
