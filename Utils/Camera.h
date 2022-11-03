@@ -8,6 +8,16 @@ class Camera
 public:
     Camera(Point3 position, double width, double height, double focus);
     Ray GetRay(double u, double v);
+    
+    inline double GetWidth()
+    {
+        return width;
+    }
+
+    inline double GetHeight()
+    {
+        return height;
+    }
 
 private:
     Point3 origin;

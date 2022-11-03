@@ -15,7 +15,7 @@ int main()
     auto lambertianBlue = std::make_shared<Lambertian>(Color(0.4, 0.4, 0.8));
     auto lambertianGreen = std::make_shared<Lambertian>(Color(0.4, 0.8, 0.4));
     auto lambertianGray = std::make_shared<Lambertian>(Color(0.5, 0.5, 0.5));
-    auto MetalGreen = std::make_shared<Metal>(Color(0.9, 0.9, 0.9), 0.1);
+    auto MetalGreen = std::make_shared<Metal>(Color(0.9, 0.9, 0.9), 0.01);
     auto lightWhite = std::make_shared<DiffuseLight>(Color(2, 2, 2), 0);
 
     auto blueSphere = std::make_shared<Sphere>(Point3(0, 0, -1.5), 0.5, lambertianBlue);

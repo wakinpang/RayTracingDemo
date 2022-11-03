@@ -19,4 +19,9 @@ private:
 
     Color rayColor(Ray ray, int depth);
     void writeColor(Color& color);
+
+    Color randomSample(int width, int height, int i, int j);
+    Color stratifiedSample(int width, int height, int i, int j);
+    Color stratifiedSampleWithJittering(int width, int height, int i, int j);
+    Color nRooksSample(int width, int height, int i, int j);
 };
